@@ -1,0 +1,12 @@
+# vi mode per default
+set editing-mode vi
+
+# show insert or edit mode indicator for vi mode
+# doesn't work with bash themes
+#set show-mode-in-prompt on
+
+# history expansion after space in Bash
+# http://askubuntu.com/questions/481268/how-do-i-enable-automatic-history-expansion-for-commands-using-magic-space
+$if Bash
+  Space: magic-space
+$endif

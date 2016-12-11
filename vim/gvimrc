@@ -1,0 +1,14 @@
+"  .gvimrc
+"  by dukat jun 2003
+
+" set font for windows
+if has("win32")
+  set guifont=lucida_console:h10
+endif
+
+" default width and colums
+set lines=40 columns=120
+
+" Syntax highlighting: Comments are supposed to be grey
+highlight Comment guifg=darkgrey
+
