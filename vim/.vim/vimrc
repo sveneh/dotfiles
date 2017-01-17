@@ -95,6 +95,7 @@ function! InitBackupDir()
   let l:missing_dir = 0
   if isdirectory(l:tmp)
     execute 'set backupdir=' . escape(l:backup, ' ') . '/,.'
+    execute 'set undodir='   . escape(l:backup, ' ') . ',.'
   else
     let l:missing_dir = 1
   endif
