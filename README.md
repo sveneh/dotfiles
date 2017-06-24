@@ -2,5 +2,5 @@
 best dotfiles EVER!
 
 ```
-stow --target=~ <configdir>
+stow -t ~ <configdir>
 ```
