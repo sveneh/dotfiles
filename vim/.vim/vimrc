@@ -14,7 +14,7 @@ set nocompatible
 " editor
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" behave more 'normal', e.g. copy / pasting works 
+" behave more 'normal', e.g. copy / pasting works
 " Note: edit mswin.vim file to enable remapped features like:
 "   - CTRL-Y: remapped to Redo instead of Scroll-Up
 "if has("win32")
@@ -43,10 +43,10 @@ set autoindent
 set wrap
 
 " autowrap at whole word boundaries
-set linebreak 
+set linebreak
 
 " visual indicator for wrapped lines
-set showbreak=>>\ 
+set showbreak=>>\
 
 " '_' is now a separator for words, for word movements with 'w' and 'b'
 set iskeyword=@,48-57,192-255
@@ -71,7 +71,7 @@ set wildmenu
 " - look for the file in home directory (n)
 set viminfo='20,\"50,%,h,n$HOME/.vim/viminfo
 
-" backups in a special directory 
+" backups in a special directory
 function! InitBackupDir()
   if has('win32') || has('win32unix') "windows/cygwin
     let l:separator = '_'
@@ -139,14 +139,18 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim' " let Vundle manage Vundle, required
 
-Plugin 'rking/ag.vim'
+" general editor plugins
+Plugin 'rking/ag.vim'                       " ag - the silver searcher
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'ShowTrailingWhitespace'             " whitespace santitizing
+Plugin 'DeleteTrailingWhitespace'
+Plugin 'tpope/vim-fugitive'                 " git
+Plugin 'vim-syntastic/syntastic'            " syntax checking
 
+" language-specific plugins
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'ternjs/tern_for_vim'
-Plugin 'kchmck/vim-coffee-script' 
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'groovyindent-unix'
 
 " install via cmdline: vim +PluginInstall +qall
