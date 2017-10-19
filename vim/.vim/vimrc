@@ -48,9 +48,6 @@ set linebreak
 " visual indicator for wrapped lines
 set showbreak=>>\
 
-" '_' is now a separator for words, for word movements with 'w' and 'b'
-set iskeyword=@,48-57,192-255
-
 " Switch on syntax highlighting if it wasn't on yet.
 if !exists("syntax_on")
   syntax on
@@ -170,10 +167,16 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" syntastic checkers need to be available in $PATH, see
+" https://github.com/vim-syntastic/syntastic#faqinfo
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_debug = 0 "65 for all
+let g:syntastic_java_checkers = ["javac"]
+let g:syntastic_java_javac_config_file_enabled = 1
+let g:syntastic_javascript_checkers = ["eslint"]
 
 " mappings
 " fast .vimrc editing
