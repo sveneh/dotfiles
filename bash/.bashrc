@@ -115,3 +115,10 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+
+#### integrations
+
+[ -r ~/.byobu/prompt ] && . ~/.byobu/prompt
+
+[ -r /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
