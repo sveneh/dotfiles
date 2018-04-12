@@ -2,5 +2,5 @@
 best dotfiles EVER!
 
 ```
-stow -t ~ <configdir>
+(x)stow -t ~ <configdir>
 ```
