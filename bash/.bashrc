@@ -8,9 +8,9 @@ case $- in
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
+# each command only once saved. start with `space` to not save in history
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignorespace:erasedups
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -119,6 +119,22 @@ fi
 
 #### integrations
 
+# snapcraft
+which snapcraft > /dev/null && export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
+
+# byobu
 [ -r ~/.byobu/prompt ] && . ~/.byobu/prompt
 
+# autojump
 [ -r /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
+
+# fzf
+[ -d /snap/fzf/current/shell ] && . /snap/fzf/current/shell/completion.bash && . /snap/fzf/current/shell/key-bindings.bash
+
+# git
+export PS1='$(__git_ps1 " (%s)") '$PS1
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+
+# npm
+[ -d ~/.npm-global ] && export PATH=~/.npm-global/bin:$PATH
