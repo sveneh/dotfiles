@@ -1,0 +1,6 @@
+{
+    "git.enableSmartCommit": true,
+    "editor.multiCursorModifier": "alt",
+    "workbench.statusBar.feedback.visible": false,
+    "java.configuration.checkProjectSettingsExclusions": false
+}
