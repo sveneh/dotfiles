@@ -1,6 +1,12 @@
 {
-    "git.enableSmartCommit": true,
     "editor.multiCursorModifier": "alt",
+    "editor.suggestSelection": "first",
+    "git.enableSmartCommit": true,
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "vim.enableNeovim": false,
+    "vim.neovimPath": "/usr/bin/nvim",
+    "vim.foldfix": true,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.startupEditor": "newUntitledFile",
     "workbench.statusBar.feedback.visible": false,
-    "java.configuration.checkProjectSettingsExclusions": false
 }
