@@ -8,16 +8,19 @@ case $- in
       *) return;;
 esac
 
-# each command only once saved. start with `space` to not save in history
-# See bash(1) for more options
+# https://unix.stackexchange.com/a/556267
+# each command only once saved. start with `space` to not save in history, e.g. for pwds
 HISTCONTROL=ignorespace:erasedups
-
-# append to the history file, don't overwrite it
+# append to the history file, don't overwrite it:Wq
 shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
+HISTSIZE=2000
 HISTFILESIZE=2000
+function _historymerge {
+    history -n; history -w; history -c; history -r;
+}
+trap _historymerge EXIT
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -125,12 +128,12 @@ which snapcraft > /dev/null && export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
 # byobu
 [ -r ~/.byobu/prompt ] && . ~/.byobu/prompt
 
-# autojump
-[ -r /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
-
 # docker buildkit option
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
+
+# autojump
+[ -r /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
 # fzf
 [ -d /snap/fzf/current/shell ] && . /snap/fzf/current/shell/completion.bash && . /snap/fzf/current/shell/key-bindings.bash
