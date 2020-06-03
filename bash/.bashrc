@@ -128,6 +128,10 @@ which snapcraft > /dev/null && export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
 # autojump
 [ -r /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
 
+# docker buildkit option
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+
 # fzf
 [ -d /snap/fzf/current/shell ] && . /snap/fzf/current/shell/completion.bash && . /snap/fzf/current/shell/key-bindings.bash
 
@@ -135,6 +139,9 @@ which snapcraft > /dev/null && export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
 export PS1='$(__git_ps1 " (%s)") '$PS1
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
+
+# kubectl krew
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 # npm
 [ -d ~/.npm-global ] && export PATH=~/.npm-global/bin:$PATH
