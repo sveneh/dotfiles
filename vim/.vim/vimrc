@@ -141,6 +141,7 @@ Plugin 'mileszs/ack.vim'                    " ack/ag - the silver searcher
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ShowTrailingWhitespace'             " whitespace santitizing
 Plugin 'DeleteTrailingWhitespace'
+Plugin 'tpope/vim-commentary'               " gc commentary toggle
 Plugin 'tpope/vim-fugitive'                 " git
 Plugin 'vim-syntastic/syntastic'            " syntax checking
 
