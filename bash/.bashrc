@@ -155,5 +155,22 @@ export GIT_PS1_SHOWSTASHSTATE=1
 # kubectl krew
 export PATH="${PATH}:${HOME}/.krew/bin"
 
+# kube_ps1
+kube_ps1_cluster_short () {
+    [[ "$1" =~ api-(.+)-squeegee ]] && echo ${BASH_REMATCH[1]} ;
+}
+[ -e ~/own/kube-ps1/kube-ps1.sh ] && source ~/own/kube-ps1/kube-ps1.sh
+KUBE_PS1_BINARY=oc
+KUBE_PS1_CLUSTER_FUNCTION=kube_ps1_cluster_short
+export PS1='$(kube_ps1)'$PS1
+
+# kube prompt
+# oc krew install prompt
+export KUBECTL_CLUSTER_PROMPT="api-prod01-squeegee-cloud:6443"
+oc () {
+    kube=$(which oc)
+    $kube prompt "${@}" && command $kube "${@}"
+}
+
 # npm
 [ -d ~/.npm-global ] && export PATH=~/.npm-global/bin:$PATH
