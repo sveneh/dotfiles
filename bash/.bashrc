@@ -152,8 +152,8 @@ export PS1='$(__git_ps1 " (%s)") '$PS1
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 
-# kubectl krew
-export PATH="${PATH}:${HOME}/.krew/bin"
+# kubectl krew + local plugins
+export PATH="${PATH}:${HOME}/.krew/bin:${HOME}/wuerth/code/infrastructure/tools"
 
 # kube_ps1
 kube_ps1_cluster_short () {
