@@ -123,46 +123,58 @@ fi
 #### integrations
 
 # wsl-specific settings
-if [[ $(uname --kernel-release) =~ Microsoft$ ]] ; then
+if [[ $(uname --kernel-release) =~ [Mm]icrosoft ]] ; then
     export PATH=~/bin:$PATH
-    export DISPLAY=localhost:0.0
-    export DOCKER_HOST=tcp://localhost:2375
+    # put Shortcut into `shell:startup`:
+    # "C:\Program Files\VcXsrv\vcxsrv.exe" :0 -ac -multiwindow -clipboard -wgl
+    # WSL 2 only  
+    export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
     # openshift
     which oc > /dev/null && source <(oc completion bash)
+    # vscode
+    export DONT_PROMPT_WSL_INSTALL=1
+
+    # Windows Tools mappings
+    alias nmap='"/mnt/c/Program Files (x86)/Nmap/nmap.exe"'
 fi
+
+# homebrew
+[[ -f /home/linuxbrew/.linuxbrew/bin/brew ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # snapcraft
 which snapcraft > /dev/null && export SNAPCRAFT_BUILD_ENVIRONMENT=lxd
 
 # byobu
-[ -r ~/.byobu/prompt ] && . ~/.byobu/prompt
+[ -r ~/.byobu/prompt ] && source ~/.byobu/prompt
 
 # docker buildkit option
 export DOCKER_BUILDKIT=1
 export COMPOSE_DOCKER_CLI_BUILD=1
 
 # autojump
-[ -r /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
+[ -r /usr/share/autojump/autojump.sh ] && source /usr/share/autojump/autojump.sh
 
 # fzf
-[ -d /snap/fzf/current/shell ] && . /snap/fzf/current/shell/completion.bash && . /snap/fzf/current/shell/key-bindings.bash
+[ -d /snap/fzf/current/shell ] && source /snap/fzf/current/shell/completion.bash && source /snap/fzf/current/shell/key-bindings.bash
 
 # git
 export PS1='$(__git_ps1 " (%s)") '$PS1
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 
-# kubectl krew
-export PATH="${PATH}:${HOME}/.krew/bin"
+# kubectl krew + Wuerth plugins
+export PATH="${PATH}:${HOME}/.krew/bin:${HOME}/wuerth/code/infrastructure/tools"
 
 # kube_ps1
-kube_ps1_cluster_short () {
-    [[ "$1" =~ api-(.+)-squeegee ]] && echo ${BASH_REMATCH[1]} ;
-}
-[ -e ~/own/kube-ps1/kube-ps1.sh ] && source ~/own/kube-ps1/kube-ps1.sh
-KUBE_PS1_BINARY=oc
-KUBE_PS1_CLUSTER_FUNCTION=kube_ps1_cluster_short
-export PS1='$(kube_ps1)'$PS1
+if [ -e  /home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh ] ; then 
+  kube_ps1_cluster_short () {
+      [[ "$1" =~ api-(.+)-squeegee ]] && echo ${BASH_REMATCH[1]} ;
+  }
+  source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
+  KUBE_PS1_BINARY=oc
+  KUBE_PS1_CLUSTER_FUNCTION=kube_ps1_cluster_short
+  export PS1='$(kube_ps1)'$PS1
+fi
 
 # kube prompt
 # oc krew install prompt
@@ -174,3 +186,8 @@ oc () {
 
 # npm
 [ -d ~/.npm-global ] && export PATH=~/.npm-global/bin:$PATH
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source. "$NVM_DIR/nvm.sh" 
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion" 
