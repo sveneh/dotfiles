@@ -1,6 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+
 
 # If not running interactively, don't do anything
 case $- in
@@ -60,9 +60,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -163,7 +163,7 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 
 # kubectl krew + Wuerth plugins
-export PATH="${PATH}:${HOME}/.krew/bin:${HOME}/wuerth/code/infrastructure/tools"
+export PATH="${PATH}:${HOME}/.krew/bin:${HOME}/wuerth/code/infrastructure/plugins"
 
 # kube_ps1
 if [ -e  /home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh ] ; then 
@@ -189,5 +189,11 @@ oc () {
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source. "$NVM_DIR/nvm.sh" 
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion" 
+
+# Perl cpanm
+if [ -d  ~/perl5/lib/perl5 ] ; then
+  eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+  export MANPATH=$HOME/perl5/man:$MANPATH
+fi
