@@ -178,11 +178,13 @@ fi
 
 # kube prompt
 # oc krew install prompt
-export KUBECTL_CLUSTER_PROMPT="api-prod01-squeegee-cloud:6443"
-oc () {
-    kube=$(which oc)
-    $kube prompt "${@}" && command $kube "${@}"
-}
+if ! oc prompt 2> /dev/null ; then
+  export KUBECTL_CLUSTER_PROMPT="api-prod01-squeegee-cloud:6443"
+  oc () {
+      kube=$(which oc)
+      $kube prompt "${@}" && command $kube "${@}"
+  }
+fi
 
 # npm
 [ -d ~/.npm-global ] && export PATH=~/.npm-global/bin:$PATH
