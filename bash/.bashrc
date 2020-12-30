@@ -178,7 +178,7 @@ fi
 
 # kube prompt
 # oc krew install prompt
-if ! oc prompt 2> /dev/null ; then
+if command oc prompt &> /dev/null ; then
   export KUBECTL_CLUSTER_PROMPT="api-prod01-squeegee-cloud:6443"
   oc () {
       kube=$(which oc)
