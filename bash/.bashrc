@@ -133,7 +133,8 @@ if [[ $(uname --kernel-release) =~ [Mm]icrosoft ]] ; then
     which oc > /dev/null && source <(oc completion bash)
     # vscode
     export DONT_PROMPT_WSL_INSTALL=1
-
+    export $(dbus-launch)
+    
     # Windows Tools mappings
     alias nmap='"/mnt/c/Program Files (x86)/Nmap/nmap.exe"'
 fi
@@ -207,9 +208,14 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion" 
+# to fix concurrency w/ brew's node.js
+nvm use --silent system
 
 # Perl cpanm
 if [ -d  ~/perl5/lib/perl5 ] ; then
   eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
   export MANPATH=$HOME/perl5/man:$MANPATH
 fi
+
+# TODO homebrew in combination with nvm seems to mess up MANPATH. Manual override
+export MANPATH=MANPATH=/home/linuxbrew/.linuxbrew/share/man:
