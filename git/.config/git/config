@@ -1,5 +1,5 @@
 [user]
-	email = sven.ehlert@wuerth-it.com
+	email = sven.ehlert@wuerth-cs.com
 	name = Sven Ehlert
 [diff]
 	tool = vimdiff
@@ -7,3 +7,6 @@
 	prompt = false
 [alias]
 	dt = difftool
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
