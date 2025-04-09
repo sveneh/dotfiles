@@ -4,9 +4,11 @@
     "git.enableSmartCommit": true,
     "java.configuration.checkProjectSettingsExclusions": false,
     "vim.enableNeovim": false,
-    "vim.neovimPath": "/usr/bin/nvim",
     "vim.foldfix": true,
+    "vim.neovimPath": "/usr/bin/nvim",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.titleBarStyle": "native",
+    "workbench.colorTheme": "Default Light Modern",
     "workbench.startupEditor": "newUntitledFile",
     "workbench.statusBar.feedback.visible": false,
 }
